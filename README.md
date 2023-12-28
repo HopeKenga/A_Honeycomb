@@ -23,7 +23,7 @@ The Honeycomb Game is a terminal-based game where players control a bee to colle
 ## Installation
 1. **Clone the Repository**:
    ```
-   git clone [repository-url]
+   git clone https://github.com/HopeKenga/A_Honeycomb.git
    ```
 2. **Navigate to the Game Directory**:
    ```
