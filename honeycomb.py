@@ -21,3 +21,24 @@ def initialize_honeycomb(rows, cols, honey_count, obstacle_count):
 
     return honeycomb
 
+def print_honeycomb(honeycomb, bee_position, score, level):
+    """
+    Print the honeycomb structure with the bee, honey, obstacles, score, and level.
+    """
+    rows, cols = len(honeycomb), len(honeycomb[0])
+    display = f"Score: {score} | Level: {level}\n"
+    for row in range(rows):
+        line = ''
+        for col in range(cols):
+            if (row, col) == bee_position:
+                cell = 'B'
+            else:
+                cell = honeycomb[row][col]
+            if row % 2 == 0:
+                line += f" /{cell}\\ "
+            else:
+                line += f" \\{cell}/ "
+        if row % 2 != 0:
+            line = ' ' * 3 + line
+        display += line + '\n'
+    return display
