@@ -42,3 +42,34 @@ def print_honeycomb(honeycomb, bee_position, score, level):
             line = ' ' * 3 + line
         display += line + '\n'
     return display
+
+def update_bee_position(bee_position, movement, rows, cols):
+    """
+    Update the bee's position based on the movement command.
+    """
+    new_row, new_col = bee_position
+    if movement == 'W':
+        new_row = max(0, bee_position[0] - 1)
+    elif movement == 'A':
+        new_col = max(0, bee_position[1] - 1)
+    elif movement == 'S':
+        new_row = min(rows - 1, bee_position[0] + 1)
+    elif movement == 'D':
+        new_col = min(cols - 1, bee_position[1] + 1)
+    
+    return new_row, new_col
+
+def process_bee_action(honeycomb, bee_position, has_honey):
+    """
+    Process the action of the bee at its current position.
+    """
+    row, col = bee_position
+    if honeycomb[row][col] == 'H' and not has_honey:
+        has_honey = True  # Bee collects honey
+        honeycomb[row][col] = '-'  # Remove honey from the cell
+    elif honeycomb[row][col] == '-' and has_honey:
+        has_honey = False  # Bee deposits honey
+        honeycomb[row][col] = 'F'  # Mark cell as filled with honey
+
+    return honeycomb, has_honey
+
