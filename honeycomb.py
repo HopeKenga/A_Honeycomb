@@ -72,4 +72,41 @@ def process_bee_action(honeycomb, bee_position, has_honey):
         honeycomb[row][col] = 'F'  # Mark cell as filled with honey
 
     return honeycomb, has_honey
+def main():
+    rows, cols = 5, 4
+    bee_position = (2, 2)
+    has_honey = False
+    score = 0
+    level = 1
+    honey_count = 5
+    obstacle_count = 3
+
+    honeycomb = initialize_honeycomb(rows, cols, honey_count, obstacle_count)
+
+    print("Welcome to the Honeycomb Game!")
+    print("Use W, A, S, D to move the bee. Press Q to quit.")
+
+    while True:
+        os.system('cls' if os.name == 'nt' else 'clear')
+        print(print_honeycomb(honeycomb, bee_position, score, level))
+
+        movement = input("Enter your move (W/A/S/D): ").upper()
+
+        if movement == 'Q':
+            print("Thanks for playing!")
+            break
+
+        new_position = update_bee_position(bee_position, movement, rows, cols)
+        # Check for obstacles
+        if honeycomb[new_position[0]][new_position[1]] == 'X':
+            print("Oops! Hit an obstacle. Game over.")
+            break
+        bee_position = new_position
+
+        honeycomb, has_honey = process_bee_action(honeycomb, bee_position, has_honey)
+        if not has_honey:  # Increase score when honey is deposited
+            score += 1
+
+if __name__ == "__main__":
+    main()
 
